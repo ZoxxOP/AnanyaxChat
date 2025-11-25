@@ -26,7 +26,7 @@ async def must_join_channel(app: Client, msg: Message):
 
             try:
                 await msg.reply_photo(
-                    photo="https://envs.sh/EuZ.jpg",
+                    photo="https://files.catbox.moe/5lmkua.jpg",
                     caption=(
                         f"**👋 ʜᴇʟʟᴏ {msg.from_user.mention},**\n\n"
                         f"**ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ᴊᴏɪɴ ᴛʜᴇ [ᴄʜᴀɴɴᴇʟ]({link}) ᴛᴏ sᴇɴᴅ ᴍᴇssᴀɢᴇs ɪɴ ᴛʜɪs ʙᴏᴛ.**"
