@@ -1,14 +1,14 @@
 from pyrogram.types import InlineKeyboardButton
 
 from config import SUPPORT_GRP, UPDATE_CHNL
-from ShrutiCHATBOT import OWNER, ShrutiCHATBOT
+from AnanyaxChat import OWNER, AnanyaxChat
 
 
 START_BOT = [
     [
         InlineKeyboardButton(
             text="❍ 𝐀ᴅᴅ 𝐌ᴇ 𝐘ᴏᴜʀ 𝐆ʀᴏᴜᴘ ❍",
-            url=f"https://t.me/{ShrutiCHATBOT.username}?startgroup=true",
+            url=f"https://t.me/{AnanyaxChat.username}?startgroup=true",
         ),
     ],
     [
@@ -29,7 +29,7 @@ DEV_OP = [
     [
         InlineKeyboardButton(
             text="❍ 𝐀ᴅᴅ 𝐌ᴇ 𝐘ᴏᴜʀ 𝐆ʀᴏᴜᴘ ❍",
-            url=f"https://t.me/{ShrutiCHATBOT.username}?startgroup=true",
+            url=f"https://t.me/{AnanyaxChat.username}?startgroup=true",
         ),
     ],
     [
@@ -44,7 +44,7 @@ PNG_BTN = [
     [
         InlineKeyboardButton(
             text="❍ 𝐀ᴅᴅ 𝐌ᴇ 𝐘ᴏᴜʀ 𝐆ʀᴏᴜᴘ ❍ ",
-            url=f"https://t.me/{ShrutiCHATBOT.username}?startgroup=true",
+            url=f"https://t.me/{AnanyaxChat.username}?startgroup=true",
         ),
     ],
     [
@@ -122,7 +122,7 @@ HELP_START = [
 HELP_BUTN = [
     [
         InlineKeyboardButton(
-            text="❍ 𝐇ᴇʟᴘ ❍", url=f"https://t.me/{ShrutiCHATBOT.username}?start=help"
+            text="❍ 𝐇ᴇʟᴘ ❍", url=f"https://t.me/{AnanyaxChat.username}?start=help"
         ),
         InlineKeyboardButton(text="❍ 𝐂ʟᴏ𝐬ᴇ ❍", callback_data="CLOSE"),
     ],
