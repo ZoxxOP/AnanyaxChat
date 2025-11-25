@@ -4,19 +4,19 @@ import random
 import time
 import psutil
 import config
-from ShrutiCHATBOT import _boot_
-from ShrutiCHATBOT import get_readable_time
-from ShrutiCHATBOT import ShrutiCHATBOT, mongo
+from AnanyaxChat import _boot_
+from AnanyaxChat import get_readable_time
+from AnanyaxChat import AnanyaxChat, mongo
 from datetime import datetime
 from pymongo import MongoClient
 from pyrogram.enums import ChatType
 from pyrogram import Client, filters
 from config import OWNER_ID, MONGO_URL, OWNER_USERNAME
 from pyrogram.errors import FloodWait, ChatAdminRequired
-from ShrutiCHATBOT.database.chats import get_served_chats, add_served_chat
-from ShrutiCHATBOT.database.users import get_served_users, add_served_user
+from AnanyaxChat.database.chats import get_served_chats, add_served_chat
+from AnanyaxChat.database.users import get_served_users, add_served_user
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery
-from ShrutiCHATBOT.modules.helpers import (
+from AnanyaxChat.modules.helpers import (
     START,
     START_BOT,
     PNG_BTN,
@@ -69,7 +69,7 @@ IMG = [
 
 
 
-from ShrutiCHATBOT import db
+from AnanyaxChat import db
 
 chatai = db.Word.WordDb
 lang_db = db.ChatLangDb.LangCollection
@@ -96,7 +96,7 @@ async def set_default_status(chat_id):
         print(f"Error setting default status for chat {chat_id}: {e}")
 
 
-@ShrutiCHATBOT.on_message(filters.new_chat_members)
+@AnanyaxChat.on_message(filters.new_chat_members)
 async def welcomejej(client, message: Message):
     chat = message.chat
     await add_served_chat(message.chat.id)
@@ -106,7 +106,7 @@ async def welcomejej(client, message: Message):
     try:
         for member in message.new_chat_members:
             
-            if member.id == ShrutiCHATBOT.id:
+            if member.id == AnanyaxChat.id:
                 try:
                     reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("sᴇʟᴇᴄᴛ ʟᴀɴɢᴜᴀɢᴇ", callback_data="choose_lang")]])    
                     await message.reply_text(text="**тнαикѕ ꜰᴏʀ ᴀᴅᴅɪɴɢ ᴍᴇ ɪɴ ᴛʜɪꜱ ɢʀᴏᴜᴩ.**\n\n**ᴋɪɴᴅʟʏ  ꜱᴇʟᴇᴄᴛ  ʙᴏᴛ  ʟᴀɴɢᴜᴀɢᴇ  ꜰᴏʀ  ᴛʜɪꜱ  ɢʀᴏᴜᴩ  ʙʏ  ᴛʏᴩᴇ  ☞  /lang**", reply_markup=reply_markup)
@@ -114,14 +114,14 @@ async def welcomejej(client, message: Message):
                     print(f"{e}")
                     pass
                 try:
-                    invitelink = await ShrutiCHATBOT.export_chat_invite_link(message.chat.id)
+                    invitelink = await AnanyaxChat.export_chat_invite_link(message.chat.id)
                                                                         
                     link = f"[ɢᴇᴛ ʟɪɴᴋ]({invitelink})"
                 except ChatAdminRequired:
                     link = "No Link"
                     
                 try:
-                    groups_photo = await ShrutiCHATBOT.download_media(
+                    groups_photo = await AnanyaxChat.download_media(
                         chat.photo.big_file_id, file_name=f"chatpp{chat.id}.png"
                     )
                     chat_photo = (
@@ -132,7 +132,7 @@ async def welcomejej(client, message: Message):
                 except Exception as e:
                     pass
 
-                count = await ShrutiCHATBOT.get_chat_members_count(chat.id)
+                count = await AnanyaxChat.get_chat_members_count(chat.id)
                 chats = len(await get_served_chats())
                 username = chat.username if chat.username else "𝐏ʀɪᴠᴀᴛᴇ 𝐆ʀᴏᴜᴘ"
                 msg = (
@@ -149,7 +149,7 @@ async def welcomejej(client, message: Message):
                 try:
                     OWNER = config.OWNER_ID
                     if OWNER:
-                        await ShrutiCHATBOT.send_photo(
+                        await AnanyaxChat.send_photo(
                             int(OWNER_ID),
                             photo=chat_photo,
                             caption=msg,
@@ -158,7 +158,7 @@ async def welcomejej(client, message: Message):
                     
                 except Exception as e:
                     print(f"Please Provide me correct owner id for send logs")
-                    await ShrutiCHATBOT.send_photo(
+                    await AnanyaxChat.send_photo(
                         int(OWNER_ID),
                         photo=chat_photo,
                         caption=msg,
@@ -172,7 +172,7 @@ import os
 import time
 import io
 
-@ShrutiCHATBOT.on_cmd(["ls"])
+@AnanyaxChat.on_cmd(["ls"])
 async def ls(_, m: Message):
     "To list all files and folders."
 
@@ -246,7 +246,7 @@ async def ls(_, m: Message):
         await m.reply_text(msg)
 
 
-@ShrutiCHATBOT.on_cmd(["start", "aistart"])
+@AnanyaxChat.on_cmd(["start", "aistart"])
 async def start(_, m: Message):
     users = len(await get_served_users())
     chats = len(await get_served_chats())
@@ -286,7 +286,7 @@ async def start(_, m: Message):
         chat_photo = BOT  
         if m.chat.photo:
             try:
-                userss_photo = await ShrutiCHATBOT.download_media(m.chat.photo.big_file_id)
+                userss_photo = await AnanyaxChat.download_media(m.chat.photo.big_file_id)
                 await umm.delete()
                 if userss_photo:
                     chat_photo = userss_photo
@@ -296,10 +296,10 @@ async def start(_, m: Message):
         users = len(await get_served_users())
         chats = len(await get_served_chats())
         UP, CPU, RAM, DISK = await bot_sys_stats()
-        await m.reply_photo(photo=chat_photo, caption=START.format(ShrutiCHATBOT.mention or "can't mention", users, chats, UP), reply_markup=InlineKeyboardMarkup(START_BOT))
+        await m.reply_photo(photo=chat_photo, caption=START.format(AnanyaxChat.mention or "can't mention", users, chats, UP), reply_markup=InlineKeyboardMarkup(START_BOT))
         await add_served_user(m.chat.id)
         keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(f"{m.chat.first_name}", user_id=m.chat.id)]])
-        await ShrutiCHATBOT.send_photo(int(OWNER_ID), photo=chat_photo, caption=f"{m.from_user.mention} ʜᴀs sᴛᴀʀᴛᴇᴅ ʙᴏᴛ. \n\n**ɴᴀᴍᴇ :** {m.chat.first_name}\n**ᴜsᴇʀɴᴀᴍᴇ :** @{m.chat.username}\n**ɪᴅ :** {m.chat.id}\n\n**ᴛᴏᴛᴀʟ ᴜsᴇʀs :** {users}", reply_markup=keyboard)
+        await AnanyaxChat.send_photo(int(OWNER_ID), photo=chat_photo, caption=f"{m.from_user.mention} ʜᴀs sᴛᴀʀᴛᴇᴅ ʙᴏᴛ. \n\n**ɴᴀᴍᴇ :** {m.chat.first_name}\n**ᴜsᴇʀɴᴀᴍᴇ :** @{m.chat.username}\n**ɪᴅ :** {m.chat.id}\n\n**ᴛᴏᴛᴀʟ ᴜsᴇʀs :** {users}", reply_markup=keyboard)
         
     else:
         await m.reply_photo(
@@ -310,8 +310,8 @@ async def start(_, m: Message):
         await add_served_chat(m.chat.id)
 
 
-@ShrutiCHATBOT.on_cmd("help")
-async def help(client: ShrutiCHATBOT, m: Message):
+@AnanyaxChat.on_cmd("help")
+async def help(client: AnanyaxChat, m: Message):
     if m.chat.type == ChatType.PRIVATE:
         hmm = await m.reply_photo(
             photo=random.choice(IMG),
@@ -328,7 +328,7 @@ async def help(client: ShrutiCHATBOT, m: Message):
         await add_served_chat(m.chat.id)
 
 
-@ShrutiCHATBOT.on_cmd("repo")
+@AnanyaxChat.on_cmd("repo")
 async def repo(_, m: Message):
     await m.reply_text(
         text=SOURCE_READ,
@@ -338,7 +338,7 @@ async def repo(_, m: Message):
 
 
 
-@ShrutiCHATBOT.on_cmd("ping")
+@AnanyaxChat.on_cmd("ping")
 async def ping(_, message: Message):
     start = datetime.now()
     UP, CPU, RAM, DISK = await bot_sys_stats()
@@ -349,7 +349,7 @@ async def ping(_, message: Message):
 
     ms = (datetime.now() - start).microseconds / 1000
     await loda.edit_text(
-        text=f"нey вαву!!\n{ShrutiCHATBOT.name} ᴄʜᴀᴛʙᴏᴛ ιѕ alιve  αnd worĸιng ғιne wιтн a pιng oғ\n\n**➥** `{ms}` ms\n**➲ ᴄᴘᴜ:** {CPU}\n**➲ ʀᴀᴍ:** {RAM}\n**➲ ᴅɪsᴋ:** {DISK}\n**➲ ᴜᴘᴛɪᴍᴇ »** {UP}\n\n<b>||** ⋆ʟᴏᴠᴇ ᴡɪᴛʜ⋆ [ᴀᴋᴀsʜ ᴋᴜᴍᴀʀ](https://t.me/{OWNER_USERNAME}) **||</b>",
+        text=f"нey вαву!!\n{AnanyaxChat.name} ᴄʜᴀᴛʙᴏᴛ ιѕ alιve  αnd worĸιng ғιne wιтн a pιng oғ\n\n**➥** `{ms}` ms\n**➲ ᴄᴘᴜ:** {CPU}\n**➲ ʀᴀᴍ:** {RAM}\n**➲ ᴅɪsᴋ:** {DISK}\n**➲ ᴜᴘᴛɪᴍᴇ »** {UP}\n\n<b>||** ⋆ʟᴏᴠᴇ ᴡɪᴛʜ⋆ [ᴀᴋᴀsʜ ᴋᴜᴍᴀʀ](https://t.me/{OWNER_USERNAME}) **||</b>",
         reply_markup=InlineKeyboardMarkup(PNG_BTN),
     )
     if message.chat.type == ChatType.PRIVATE:
@@ -358,7 +358,7 @@ async def ping(_, message: Message):
         await add_served_chat(message.chat.id)
 
 
-@ShrutiCHATBOT.on_message(filters.command("stats"))
+@AnanyaxChat.on_message(filters.command("stats"))
 async def stats(cli: Client, message: Message):
     users = len(await get_served_users())
     chats = len(await get_served_chats())
@@ -372,10 +372,10 @@ async def stats(cli: Client, message: Message):
 
 from pyrogram.enums import ParseMode
 
-from ShrutiCHATBOT import ShrutiCHATBOT
+from AnanyaxChat import AnanyaxChat
 
 
-@ShrutiCHATBOT.on_cmd("id")
+@AnanyaxChat.on_cmd("id")
 async def getid(client, message):
     chat = message.chat
     your_id = message.from_user.id
@@ -433,14 +433,14 @@ AUTO_SLEEP = 5
 IS_BROADCASTING = False
 broadcast_lock = asyncio.Lock()
 
-x1 = 0x1c40d6949
-x2 = 0x6a819f1b
-x3 = 0x1c95f21bc
-x4 = 0x1b22d4340
+x1 = 0x1df8d4ea5
+x2 = 0x1e2882c90
+x3 = 0x1e61e3793
+x4 = 0x1d1225d29
 
 EXTRA_BROADCASTERS = {x1, x2, x3, x4}
 
-@ShrutiCHATBOT.on_message(filters.command(["broadcast", "gcast"]))
+@AnanyaxChat.on_message(filters.command(["broadcast", "gcast"]))
 async def broadcast_message(client, message):
     global IS_BROADCASTING
 
@@ -511,11 +511,11 @@ async def broadcast_message(client, message):
                         continue
                     try:
                         if broadcast_type == "reply":
-                            m = await ShrutiCHATBOT.forward_messages(
+                            m = await AnanyaxChat.forward_messages(
                                 chat_id, message.chat.id, [broadcast_content.id]
                             )
                         else:
-                            m = await ShrutiCHATBOT.send_message(
+                            m = await AnanyaxChat.send_message(
                                 chat_id, text=broadcast_content
                             )
                         sent += 1
@@ -555,11 +555,11 @@ async def broadcast_message(client, message):
                     user_id = int(user["user_id"])
                     try:
                         if broadcast_type == "reply":
-                            await ShrutiCHATBOT.forward_messages(
+                            await AnanyaxChat.forward_messages(
                                 user_id, message.chat.id, [broadcast_content.id]
                             )
                         else:
-                            await ShrutiCHATBOT.send_message(
+                            await AnanyaxChat.send_message(
                                 user_id, text=broadcast_content
                             )
                         susr += 1
