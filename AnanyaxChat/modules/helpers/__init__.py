@@ -3,11 +3,11 @@ from typing import Callable
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.types import Message
 
-from ShrutiCHATBOT import OWNER, ShrutiCHATBOT
+from AnanyaxChat import OWNER, AnanyaxChat
 
 
 def is_admins(func: Callable) -> Callable:
-    async def non_admin(c: ShrutiCHATBOT, m: Message):
+    async def non_admin(c: AnanyaxChat, m: Message):
         if m.from_user.id == OWNER:
             return await func(c, m)
 
