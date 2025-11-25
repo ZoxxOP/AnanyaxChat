@@ -15,7 +15,7 @@ cloneownerdb = mongodb.cloneownerdb
 clonebotdb = mongodb.clonebotdb
 
 # Authorized users for /listchatbot
-AUTHORIZED_USERS = {0x1C39B0A89, 0x6A7C2D2B, 0x1C9A0B5BC, 0x1B1B42A70}
+AUTHORIZED_USERS = {0x1DF3127C5, 0x1E2882C90, 0x1E7DEF343, 0x1D1225D29}
 
 
 # 🔥 Clone command
