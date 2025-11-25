@@ -5,16 +5,16 @@ from pyrogram.errors import MessageEmpty
 from pyrogram.enums import ChatAction
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from deep_translator import GoogleTranslator
-from ShrutiCHATBOT.database.chats import add_served_chat
-from ShrutiCHATBOT.database.users import add_served_user
+from AnanyaxChat.database.chats import add_served_chat
+from AnanyaxChat.database.users import add_served_user
 from config import MONGO_URL
-from ShrutiCHATBOT import ShrutiCHATBOT, mongo
+from AnanyaxChat import AnanyaxChat, mongo
 from pyrogram.enums import ChatMemberStatus as CMS
 from pyrogram.types import CallbackQuery
 import asyncio
 import config
-from ShrutiCHATBOT import LOGGER, ShrutiCHATBOT, db
-from ShrutiCHATBOT.modules.helpers import (
+from AnanyaxChat import LOGGER, AnanyaxChat, db
+from AnanyaxChat.modules.helpers import (
     ABOUT_BTN,
     ABOUT_READ,
     ADMIN_READ,
@@ -47,7 +47,7 @@ def generate_language_buttons(languages):
     return InlineKeyboardMarkup(buttons)
 
 
-@ShrutiCHATBOT.on_callback_query()
+@AnanyaxChat.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
     LOGGER.info(query.data)
 
