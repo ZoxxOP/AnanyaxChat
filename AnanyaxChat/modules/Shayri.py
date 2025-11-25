@@ -1,9 +1,9 @@
 
 import random
-from ShrutiCHATBOT.database import get_served_chats
+from AnanyaxChat.database import get_served_chats
 from pyrogram import Client, filters
 import os
-from ShrutiCHATBOT import ShrutiCHATBOT
+from AnanyaxChat import AnanyaxChat
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from pyrogram import filters
 import random
@@ -63,7 +63,7 @@ SHAYRI = [
 SHAYRI_COMMAND = ["gf", "bf", "shayri", "sari", "shari", "love"]
 
 
-@ShrutiCHATBOT.on_message(filters.command(SHAYRI_COMMAND))
+@AnanyaxChat.on_message(filters.command(SHAYRI_COMMAND))
 async def shayri(client: Client, message: Message):
     
     await message.reply_text(
