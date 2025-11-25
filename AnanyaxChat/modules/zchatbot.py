@@ -8,12 +8,12 @@ from pyrogram.errors import UserNotParticipant
 from pyrogram.enums import ChatAction, ChatMemberStatus as CMS
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery
 from deep_translator import GoogleTranslator
-from ShrutiCHATBOT.database.chats import add_served_chat
-from ShrutiCHATBOT.database.users import add_served_user
+from AnanyaxChat.database.chats import add_served_chat
+from AnanyaxChat.database.users import add_served_user
 from config import MONGO_URL
-from ShrutiCHATBOT import ShrutiCHATBOT, mongo, LOGGER, db
-from ShrutiCHATBOT.modules.helpers import chatai, CHATBOT_ON
-from ShrutiCHATBOT.modules.helpers import (
+from AnanyaxChat import AnanyaxChat, mongo, LOGGER, db
+from AnanyaxChat.modules.helpers import chatai, CHATBOT_ON
+from AnanyaxChat.modules.helpers import (
     ABOUT_BTN,
     ABOUT_READ,
     ADMIN_READ,
@@ -100,7 +100,7 @@ async def get_chat_language(chat_id):
     return chat_lang["language"] if chat_lang and "language" in chat_lang else None
     
             
-@ShrutiCHATBOT.on_message(filters.incoming)
+@AnanyaxChat.on_message(filters.incoming)
 async def chatbot_response(client: Client, message: Message):
     global blocklist, message_counts
     try:
@@ -140,7 +140,7 @@ async def chatbot_response(client: Client, message: Message):
             else:
                 return await add_served_user(chat_id)
         
-        if (message.reply_to_message and message.reply_to_message.from_user.id == ShrutiCHATBOT.id) or not message.reply_to_message:
+        if (message.reply_to_message and message.reply_to_message.from_user.id == AnanyaxChat.id) or not message.reply_to_message:
             reply_data = await get_reply(message.text)
 
             if reply_data:
