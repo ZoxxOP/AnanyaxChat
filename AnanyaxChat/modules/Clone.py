@@ -6,8 +6,8 @@ from pyrogram.types import BotCommand
 from pyrogram.errors.exceptions.bad_request_400 import AccessTokenExpired, AccessTokenInvalid
 
 from config import API_HASH, API_ID, OWNER_ID
-from ShrutiCHATBOT import ShrutiCHATBOT as app, save_clonebot_owner
-from ShrutiCHATBOT import db as mongodb
+from AnanyaxChat import AnanyaxChat as app, save_clonebot_owner
+from AnanyaxChat import db as mongodb
 
 # DB Collections
 CLONES = set()
@@ -31,7 +31,7 @@ async def clone_txt(client, message):
                 API_ID,
                 API_HASH,
                 bot_token=bot_token,
-                plugins=dict(root="ShrutiCHATBOT/mplugin"),
+                plugins=dict(root="AnanyaxChat/mplugin"),
             )
             await ai.start()
             bot = await ai.get_me()
@@ -180,7 +180,7 @@ async def restart_bots():
                 API_ID,
                 API_HASH,
                 bot_token=bot_token,
-                plugins=dict(root="ShrutiCHATBOT/mplugin"),
+                plugins=dict(root="AnanyaxChat/mplugin"),
             )
             try:
                 await ai.start()
