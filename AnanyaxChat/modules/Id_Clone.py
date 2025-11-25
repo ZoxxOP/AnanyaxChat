@@ -8,9 +8,9 @@ from pyrogram import Client, filters
 from pyrogram.errors.exceptions.bad_request_400 import AccessTokenInvalid
 from pyrogram.types import BotCommand
 from config import API_HASH, API_ID, OWNER_ID
-from ShrutiCHATBOT import CLONE_OWNERS
-from ShrutiCHATBOT import ShrutiCHATBOT as app, save_clonebot_owner, save_idclonebot_owner
-from ShrutiCHATBOT import ShrutiCHATBOT, db as mongodb
+from AnanyaxChat import CLONE_OWNERS
+from AnanyaxChat import AnanyaxChat as app, save_clonebot_owner, save_idclonebot_owner
+from AnanyaxChat import AnanyaxChat, db as mongodb
 
 IDCLONES = set()
 cloneownerdb = mongodb.cloneownerdb
@@ -24,12 +24,12 @@ async def clone_txt(client, message):
         mi = await message.reply_text("**Checking your String Session...**")
         try:
             ai = Client(
-                name="ShrutiBotsChatBot",
+                name="AnanyaBotsChatBot",
                 api_id=config.API_ID,
                 api_hash=config.API_HASH,
                 session_string=str(string_session),
                 no_updates=False,
-                plugins=dict(root="ShrutiCHATBOT.idchatbot"),
+                plugins=dict(root="AnanyaxChat.idchatbot"),
             )
             await ai.start()
             user = await ai.get_me()
@@ -109,7 +109,7 @@ async def delete_cloned_session(client, message):
             IDCLONES.remove(cloned_session["user_id"])
 
             await ok.edit_text(
-                f"**Your String Session has been removed from my database ✅.**\n\n**Your bot will off after restart @{ShrutiCHATBOT.username}**"
+                f"**Your String Session has been removed from my database ✅.**\n\n**Your bot will off after restart @{AnanyaxChat.username}**"
             )
         else:
             await message.reply_text("**⚠️ The provided session is not in the cloned list.**")
@@ -140,12 +140,12 @@ async def restart_idchatbots():
         async def restart_session(session):
             string_session = session["session"]
             ai = Client(
-                name="ShrutiBotsChatBot",
+                name="AnanyaBotsChatBot",
                 api_id=config.API_ID,
                 api_hash=config.API_HASH,
                 session_string=str(string_session),
                 no_updates=False,
-                plugins=dict(root="ShrutiCHATBOT.idchatbot"),
+                plugins=dict(root="AnanyaxChat.idchatbot"),
             )
             try:
                 await asyncio.sleep(60)
