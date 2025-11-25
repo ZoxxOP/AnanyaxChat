@@ -1,4 +1,4 @@
-from ShrutiCHATBOT import db
+from AnanyaxChat import db
 
 usersdb = db.users
 
