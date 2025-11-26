@@ -12,8 +12,6 @@ asyncio.set_event_loop_policy(asyncio.DefaultEventLoopPolicy())
 
 ID_CHATBOT = None
 CLONE_OWNERS = {}
-import uvloop
-uvloop.install()
 
 logging.basicConfig(
     format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
