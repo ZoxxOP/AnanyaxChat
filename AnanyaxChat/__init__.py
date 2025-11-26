@@ -7,9 +7,12 @@ from motor.motor_asyncio import AsyncIOMotorClient as MongoCli
 from pyrogram import Client
 from pyrogram.enums import ParseMode
 import config
+import asyncio
+asyncio.set_event_loop_policy(asyncio.DefaultEventLoopPolicy())
 
 ID_CHATBOT = None
 CLONE_OWNERS = {}
+import uvloop
 uvloop.install()
 
 logging.basicConfig(
